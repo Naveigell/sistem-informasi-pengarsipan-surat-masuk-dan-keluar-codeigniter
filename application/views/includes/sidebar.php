@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var CI_Session $session
+ */
+
+?>
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -19,7 +25,9 @@
 			<span>Beranda</span>
 		</a>
 	</li>
-
+	<?php
+		if ($this->session->userdata('role') == "admin") {
+	?>
 	<hr class="sidebar-divider">
 
 	<div class="sidebar-heading">
@@ -32,6 +40,8 @@
 			<span>Data Pegawai</span>
 		</a>
 	</li>
+
+	<?php } else if ($this->session->userdata('role') == "pegawai") { ?>
 
 	<hr class="sidebar-divider">
 
@@ -62,8 +72,23 @@
 		</a>
 	</li>
 
+	<?php } ?>
+
+	<hr class="sidebar-divider">
+
+	<div class="sidebar-heading">
+		Account
+	</div>
+
+	<li class="nav-item">
+		<a class="nav-link" href="<?php base_url() ?>biodata">
+			<i class="fas fa-fw fa-cogs"></i>
+			<span>Biodata</span>
+		</a>
+	</li>
+
 	<div class="text-center d-none d-md-inline" style="margin: 10px;">
-		<button style="width: 100%;" class="btn btn-danger btn-sm">Logout</button>
+		<a href="<?php echo base_url(); ?>logout" style="width: 100%;" class="btn btn-danger btn-sm">Logout</a>
 	</div>
 </ul>
 <!-- End of Sidebar -->

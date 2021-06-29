@@ -5,8 +5,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * Class Laporan
  * @property PdfParser $pdfparser
  * @property CI_DB_pdo_driver $db
+ * @property CI_Session $session
  */
 class Laporan extends CI_Controller {
+	public function __construct()
+	{
+		parent::__construct();
+
+		if(!$this->session->userdata('id') ||
+			$this->session->userdata('role') == "admin") {
+			redirect(base_url().'login');
+		}
+	}
+
 	public function index()
 	{
 		$data = array();

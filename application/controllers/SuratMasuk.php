@@ -10,8 +10,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property CI_DB_pdo_driver $db
  */
 class SuratMasuk extends CI_Controller {
-
 	private $table = 'tb_suratmasuk';
+
+	public function __construct()
+	{
+		parent::__construct();
+
+		if(!$this->session->userdata('id') ||
+			$this->session->userdata('role') == "admin") {
+			redirect(base_url().'login');
+		}
+	}
 
 	public function index()
 	{

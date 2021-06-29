@@ -12,6 +12,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class SuratKeluar extends CI_Controller {
 	private $table = 'tb_suratkeluar';
 
+	public function __construct()
+	{
+		parent::__construct();
+
+		if(!$this->session->userdata('id') ||
+			$this->session->userdata('role') == "admin") {
+			redirect(base_url().'login');
+		}
+	}
+
 	public function index()
 	{
 		$data = array();

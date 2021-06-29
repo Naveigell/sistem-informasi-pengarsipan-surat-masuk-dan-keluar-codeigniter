@@ -6,14 +6,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property CI_Form_validation $form_validation
  * @property CI_Input $input
  * @property CI_Session $session
+ * @property CI_DB_pdo_driver $db
  */
 class Login extends CI_Controller {
 
 	public function __construct()
 	{
 		parent::__construct();
-//		$this->load->helper(array('form', 'url'));
-//		$this->load->library('form_validation');
+
+		if($this->session->userdata('id')) {
+			redirect(base_url().'dashboard');
+		}
 	}
 
 	public function index()
@@ -35,7 +38,38 @@ class Login extends CI_Controller {
 			$this->form_validation->set_rules('password', 'Password', 'required|min_length[5]');
 
 			if ($this->form_validation->run()) {
-				redirect(base_url().'dashboard');
+				$email 		= $this->input->post('email');
+				$password 	= $this->input->post('password');
+
+				$user 	= $this->db->select("*")->from("tbuser")->where("email", $email)->get()->result_object();
+				if (count($user) > 0) {
+					if (password_verify($password, $user[0]->password)) {
+						$data = array(
+							"id"			=> $user[0]->user_id,
+							"username"		=> $user[0]->username,
+							"role"			=> $user[0]->role,
+						);
+
+						// update the last login
+						$this->db->where("user_id", $user[0]->user_id)->update("tbuser", array(
+							"last_login"	=> date("Y-m-d H:i:s")
+						));
+
+						$this->session->set_userdata($data);
+
+						redirect(base_url().'dashboard');
+					} else {
+						$this->session->set_flashdata('errors', array(
+							"password"		=> "Password wrong!"
+						));
+					}
+				} else {
+					$this->session->set_flashdata('errors', array(
+						"email"		=> "User not found"
+					));
+				}
+
+				redirect(base_url().'login');
 			} else {
 				$field_names = array('email', 'password');
 				$errors = array();

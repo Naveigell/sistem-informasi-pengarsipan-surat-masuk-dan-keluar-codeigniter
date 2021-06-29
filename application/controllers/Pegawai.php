@@ -13,6 +13,16 @@ class Pegawai extends CI_Controller {
 	private $table = 'tbuser';
 	private $role = 'pegawai';
 
+	public function __construct()
+	{
+		parent::__construct();
+
+		if(!$this->session->userdata('id') ||
+			$this->session->userdata('role') == "pegawai") {
+			redirect(base_url().'login');
+		}
+	}
+
 	public function index()
 	{
 		$data = array();

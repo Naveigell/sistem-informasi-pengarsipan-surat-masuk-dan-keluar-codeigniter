@@ -114,10 +114,6 @@
 											})
 										});
 									}
-
-									function deleteItem(event) {
-
-									}
 								</script>
 							</div>
 						</div>

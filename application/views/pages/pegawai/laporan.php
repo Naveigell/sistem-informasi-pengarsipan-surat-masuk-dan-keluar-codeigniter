@@ -9,6 +9,7 @@
 						<h6 class="m-0 font-weight-bold text-primary">Daftar Surat Keluar</h6>
 					</div>
 					<div class="card-body">
+						<button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mb-4"><i class="fas fa-print fa-sm text-white-50"></i> &nbsp; Cetak PDF</button>
 						<div class="table-responsive">
 							<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
 								<div class="row">

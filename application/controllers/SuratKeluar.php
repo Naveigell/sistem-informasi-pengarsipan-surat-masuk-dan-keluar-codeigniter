@@ -40,6 +40,10 @@ class SuratKeluar extends CI_Controller {
 
 	public function show($id = null)
 	{
+		if (is_null($id)) {
+			redirect(base_url().'suratkeluar');
+		}
+
 		$surat = $this->db->select('*')->from($this->table)->where('id_sk', $id)->get()->result_object();
 
 		$data['surat_keluar'] 	= $surat;
@@ -50,6 +54,10 @@ class SuratKeluar extends CI_Controller {
 
 	public function edit($id = null)
 	{
+		if (is_null($id)) {
+			redirect(base_url().'suratkeluar');
+		}
+
 		$data = array();
 		$errors 				= $this->session->flashdata('errors');
 		if (isset($errors)) {

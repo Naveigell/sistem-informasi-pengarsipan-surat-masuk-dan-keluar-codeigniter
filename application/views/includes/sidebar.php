@@ -20,18 +20,18 @@
 		</a>
 	</li>
 
-<!--	<hr class="sidebar-divider">-->
-<!---->
-<!--	<div class="sidebar-heading">-->
-<!--		Data-->
-<!--	</div>-->
-<!---->
-<!--	<li class="nav-item">-->
-<!--		<a class="nav-link" href="--><?php //base_url() ?><!--/pegawai">-->
-<!--			<i class="fas fa-fw fa-user"></i>-->
-<!--			<span>Data Pegawai</span>-->
-<!--		</a>-->
-<!--	</li>-->
+	<hr class="sidebar-divider">
+
+	<div class="sidebar-heading">
+		Data
+	</div>
+
+	<li class="nav-item">
+		<a class="nav-link" href="<?php base_url() ?>/pegawai">
+			<i class="fas fa-fw fa-user"></i>
+			<span>Data Pegawai</span>
+		</a>
+	</li>
 
 	<hr class="sidebar-divider">
 

@@ -1,3 +1,10 @@
+<?php
+/**
+ * @var $errors
+ * @var $message_success
+ * @var $pegawai
+ */
+?>
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -18,6 +25,11 @@
 						<h6 class="m-0 font-weight-bold text-primary">Daftar Pegawai</h6>
 					</div>
 					<div class="card-body">
+						<?php if (isset($message_success)) { ?>
+							<div class="alert alert-success">
+								<?php echo $message_success; ?>
+							</div>
+						<?php } ?>
 						<div class="table-responsive">
 							<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
 								<div class="row">
@@ -47,19 +59,18 @@
 											</tfoot>
 											<tbody>
 											<?php
-												for ($i = 0; $i < 90; $i++) {
+												for ($i = 0; $i < count($pegawai); $i++) {
 											?>
 												<tr role="row" class="odd">
-													<td class="sorting_1"><?php echo rand();?></td>
-													<td>Accountant</td>
-													<td>Tokyo</td>
-													<td>33</td>
-													<td>2008/11/28</td>
-													<td>$162,700</td>
+													<td class="sorting_1"><?php echo $i + 1; ?></td>
+													<td><?php echo $pegawai[$i]->user_id; ?></td>
+													<td><?php echo $pegawai[$i]->username; ?></td>
+													<td><?php echo $pegawai[$i]->nama_lengkap; ?></td>
+													<td><?php echo $pegawai[$i]->email; ?></td>
+													<td><?php echo $pegawai[$i]->phone; ?></td>
 													<td>
-														<button class="btn btn-primary btn-sm" type="button">Lihat</button>
-														<button class="btn btn-warning btn-sm" type="button">Ubah</button>
-														<button class="btn btn-danger btn-sm" type="button">Hapus</button>
+														<a href="<?php base_url(); ?>pegawai/show/<?php echo $pegawai[$i]->user_id; ?>" class="btn btn-primary btn-sm" type="button">Lihat</a>
+														<button data-id="<?php echo $pegawai[$i]->user_id; ?>" data-nama="<?php echo $pegawai[$i]->nama_lengkap; ?>" class="btn btn-danger btn-sm delete-button" type="button">Hapus</button>
 													</td>
 												</tr>
 											<?php
@@ -69,6 +80,44 @@
 										</table>
 									</div>
 								</div>
+								<script>
+									const buttons = document.getElementsByClassName('delete-button');
+									for (const button of buttons) {
+										button.addEventListener('click', function (evt) {
+											const id 	= evt.target.getAttribute('data-id');
+											const nama 	= evt.target.getAttribute('data-nama');
+
+											Swal.fire({
+												title: `Hapus pegawai dengan nama "${nama}" ?`,
+												text: "Pegawai akan dihapus secara permanen",
+												icon: 'warning',
+												showCancelButton: true,
+												confirmButtonColor: '#e74a3b',
+												confirmButtonText: 'Hapus',
+												cancelButtonText: 'Batal'
+											}).then((result) => {
+												if (result.isConfirmed) {
+													$.ajax({
+														type: 'POST',
+														url: '<?php base_url(); ?>pegawai/delete/' + id,
+														success: function (response) {
+															Swal.fire(
+																	'Berhasil dihapus!',
+																	response.message,
+																	'success'
+															).then(() => {
+																window.location.reload();
+															});
+														},
+														data: {
+															csrf_test_name: '<?php echo $this->security->get_csrf_hash();?>'
+														}
+													});
+												}
+											})
+										});
+									}
+								</script>
 							</div>
 						</div>
 					</div>

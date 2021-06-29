@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var $surat_masuk
+ * @var $surat_keluar
+ */
+?>
 <div class="container-fluid">
 	<div class="row">
 
@@ -9,7 +15,7 @@
 						<h6 class="m-0 font-weight-bold text-primary">Daftar Surat Keluar</h6>
 					</div>
 					<div class="card-body">
-						<button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mb-4"><i class="fas fa-print fa-sm text-white-50"></i> &nbsp; Cetak PDF</button>
+						<a href="<?php echo base_url(); ?>laporan/suratkeluar" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mb-4"><i class="fas fa-print fa-sm text-white-50"></i> &nbsp; Cetak PDF</a>
 						<div class="table-responsive">
 							<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
 								<div class="row">
@@ -20,9 +26,7 @@
 												<th rowspan="1" colspan="1">No</th>
 												<th rowspan="1" colspan="1">No Surat</th>
 												<th rowspan="1" colspan="1">Perihal</th>
-												<th rowspan="1" colspan="1">Pengirim</th>
 												<th rowspan="1" colspan="1">Tanggal</th>
-												<th rowspan="1" colspan="1">Aksi</th>
 											</tr>
 											</thead>
 											<tfoot>
@@ -30,26 +34,18 @@
 												<th rowspan="1" colspan="1">No</th>
 												<th rowspan="1" colspan="1">No Surat</th>
 												<th rowspan="1" colspan="1">Perihal</th>
-												<th rowspan="1" colspan="1">Pengirim</th>
 												<th rowspan="1" colspan="1">Tanggal</th>
-												<th rowspan="1" colspan="1">Aksi</th>
 											</tr>
 											</tfoot>
 											<tbody>
 											<?php
-											for ($i = 0; $i < 90; $i++) {
+											for ($i = 0; $i < count($surat_keluar); $i++) {
 												?>
 												<tr role="row" class="odd">
-													<td class="sorting_1"><?php echo rand();?></td>
-													<td>Accountant</td>
-													<td>Tokyo</td>
-													<td>33</td>
-													<td>33</td>
-													<td>
-														<button class="btn btn-primary btn-sm" type="button">Lihat</button>
-														<button class="btn btn-warning btn-sm" type="button">Ubah</button>
-														<button class="btn btn-danger btn-sm" type="button">Hapus</button>
-													</td>
+													<td class="sorting_1"><?php echo $i + 1; ?></td>
+													<td><?php echo $surat_keluar[$i]->no_surat; ?></td>
+													<td><?php echo $surat_keluar[$i]->perihal; ?></td>
+													<td><?php echo $surat_keluar[$i]->tanggal_sk; ?></td>
 												</tr>
 												<?php
 											}
@@ -75,6 +71,7 @@
 						<h6 class="m-0 font-weight-bold text-primary">Daftar Surat Masuk</h6>
 					</div>
 					<div class="card-body">
+						<a href="<?php echo base_url(); ?>laporan/suratmasuk" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mb-4"><i class="fas fa-print fa-sm text-white-50"></i> &nbsp; Cetak PDF</a>
 						<div class="table-responsive">
 							<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
 								<div class="row">
@@ -82,36 +79,29 @@
 										<table class="table table-bordered dataTable" id="dataTable2" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
 											<thead>
 											<tr role="row">
+												<th rowspan="1" colspan="1">No</th>
 												<th rowspan="1" colspan="1">No Surat</th>
 												<th rowspan="1" colspan="1">Perihal</th>
 												<th rowspan="1" colspan="1">Tanggal</th>
-												<th rowspan="1" colspan="1">Dibaca</th>
-												<th rowspan="1" colspan="1">Aksi</th>
 											</tr>
 											</thead>
 											<tfoot>
 											<tr>
+												<th rowspan="1" colspan="1">No</th>
 												<th rowspan="1" colspan="1">No Surat</th>
 												<th rowspan="1" colspan="1">Perihal</th>
 												<th rowspan="1" colspan="1">Tanggal</th>
-												<th rowspan="1" colspan="1">Dibaca</th>
-												<th rowspan="1" colspan="1">Aksi</th>
 											</tr>
 											</tfoot>
 											<tbody>
 											<?php
-											for ($i = 0; $i < 90; $i++) {
+											for ($i = 0; $i < count($surat_masuk); $i++) {
 												?>
 												<tr role="row" class="odd">
-													<td class="sorting_1"><?php echo rand();?></td>
-													<td>Accountant</td>
-													<td>Tokyo</td>
-													<td>33</td>
-													<td>
-														<button class="btn btn-primary btn-sm" type="button">Lihat</button>
-														<button class="btn btn-warning btn-sm" type="button">Ubah</button>
-														<button class="btn btn-danger btn-sm" type="button">Hapus</button>
-													</td>
+													<td class="sorting_1"><?php echo $i + 1; ?></td>
+													<td><?php echo $surat_masuk[$i]->no_surat; ?></td>
+													<td><?php echo $surat_masuk[$i]->perihal; ?></td>
+													<td><?php echo $surat_masuk[$i]->tanggal_sm; ?></td>
 												</tr>
 												<?php
 											}

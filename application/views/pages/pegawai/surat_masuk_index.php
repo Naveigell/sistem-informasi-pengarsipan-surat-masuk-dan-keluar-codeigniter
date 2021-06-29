@@ -67,9 +67,9 @@
 														<?php } ?>
 													</td>
 													<td>
-														<button class="btn btn-primary btn-sm" type="button">Lihat</button>
-														<button class="btn btn-warning btn-sm" type="button">Ubah</button>
-														<button class="btn btn-danger btn-sm" type="button">Hapus</button>
+														<a href="<?php base_url(); ?>suratmasuk/show/<?php echo $surat->id_sm; ?>" class="btn btn-primary btn-sm" type="button">Lihat</a>
+														<a href="<?php base_url(); ?>suratmasuk/edit/<?php echo $surat->id_sm; ?>" class="btn btn-warning btn-sm" type="button">Ubah</a>
+														<button data-surat="<?php echo $surat->no_surat; ?>" data-id="<?php echo $surat->id_sm; ?>" class="btn btn-danger btn-sm delete-button" type="button">Hapus</button>
 													</td>
 												</tr>
 												<?php
@@ -79,6 +79,44 @@
 										</table>
 									</div>
 								</div>
+								<script>
+									const buttons = document.getElementsByClassName('delete-button');
+									for (const button of buttons) {
+										button.addEventListener('click', function (evt) {
+											const id = evt.target.getAttribute('data-id');
+											const no = evt.target.getAttribute('data-surat');
+
+											Swal.fire({
+												title: `Hapus surat masuk dengan nomor ${no} ?`,
+												text: "Surat akan dihapus secara permanen",
+												icon: 'warning',
+												showCancelButton: true,
+												confirmButtonColor: '#e74a3b',
+												confirmButtonText: 'Hapus',
+												cancelButtonText: 'Batal'
+											}).then((result) => {
+												if (result.isConfirmed) {
+													$.ajax({
+														type: 'POST',
+														url: '<?php base_url(); ?>suratmasuk/delete/' + id,
+														success: function (response) {
+															Swal.fire(
+																	'Berhasil dihapus!',
+																	response.message,
+																	'success'
+															).then(() => {
+																window.location.reload();
+															});
+														},
+														data: {
+															csrf_test_name: '<?php echo $this->security->get_csrf_hash();?>'
+														}
+													});
+												}
+											})
+										});
+									}
+								</script>
 							</div>
 						</div>
 					</div>

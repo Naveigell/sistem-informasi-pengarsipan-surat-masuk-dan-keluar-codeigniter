@@ -1,4 +1,10 @@
-
+<?php
+/**
+ * @var $errors
+ * @var $message_success
+ * @var $surat_keluar
+ */
+?>
 <div class="container-fluid">
 
 	<!-- Page Heading -->
@@ -18,6 +24,11 @@
 						<h6 class="m-0 font-weight-bold text-primary">Daftar Surat Keluar</h6>
 					</div>
 					<div class="card-body">
+						<?php if (isset($message_success)) { ?>
+							<div class="alert alert-success">
+								<?php echo $message_success; ?>
+							</div>
+						<?php } ?>
 						<div class="table-responsive">
 							<div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
 								<div class="row">
@@ -45,18 +56,18 @@
 											</tfoot>
 											<tbody>
 											<?php
-											for ($i = 0; $i < 90; $i++) {
+											for ($i = 0; $i < count($surat_keluar); $i++) {
 												?>
 												<tr role="row" class="odd">
-													<td class="sorting_1"><?php echo rand();?></td>
-													<td>Accountant</td>
-													<td>Tokyo</td>
-													<td>33</td>
-													<td>33</td>
+													<td><?php echo $i + 1; ?></td>
+													<td class="sorting_1"><?php echo $surat_keluar[$i]->no_surat; ?></td>
+													<td><?php echo $surat_keluar[$i]->perihal; ?></td>
+													<td><?php echo $surat_keluar[$i]->pengirim; ?></td>
+													<td><?php echo $surat_keluar[$i]->tanggal_sk; ?></td>
 													<td>
-														<button class="btn btn-primary btn-sm" type="button">Lihat</button>
-														<button class="btn btn-warning btn-sm" type="button">Ubah</button>
-														<button class="btn btn-danger btn-sm" type="button">Hapus</button>
+														<a href="<?php base_url(); ?>suratkeluar/show/<?php echo $surat_keluar[$i]->id_sk; ?>" class="btn btn-primary btn-sm" type="button">Lihat</a>
+														<a href="<?php base_url(); ?>suratkeluar/edit/<?php echo $surat_keluar[$i]->id_sk; ?>" class="btn btn-warning btn-sm" type="button">Ubah</a>
+														<button data-surat="<?php echo $surat_keluar[$i]->no_surat; ?>" data-id="<?php echo $surat_keluar[$i]->id_sk; ?>" class="btn btn-danger btn-sm delete-button" type="button">Hapus</button>
 													</td>
 												</tr>
 												<?php
@@ -66,6 +77,48 @@
 										</table>
 									</div>
 								</div>
+								<script>
+									const buttons = document.getElementsByClassName('delete-button');
+									for (const button of buttons) {
+										button.addEventListener('click', function (evt) {
+											const id = evt.target.getAttribute('data-id');
+											const no = evt.target.getAttribute('data-surat');
+
+											Swal.fire({
+												title: `Hapus surat keluar dengan nomor ${no} ?`,
+												text: "Surat akan dihapus secara permanen",
+												icon: 'warning',
+												showCancelButton: true,
+												confirmButtonColor: '#e74a3b',
+												confirmButtonText: 'Hapus',
+												cancelButtonText: 'Batal'
+											}).then((result) => {
+												if (result.isConfirmed) {
+													$.ajax({
+														type: 'POST',
+														url: '<?php base_url(); ?>suratkeluar/delete/' + id,
+														success: function (response) {
+															Swal.fire(
+																	'Berhasil dihapus!',
+																	response.message,
+																	'success'
+															).then(() => {
+																window.location.reload();
+															});
+														},
+														data: {
+															csrf_test_name: '<?php echo $this->security->get_csrf_hash();?>'
+														}
+													});
+												}
+											})
+										});
+									}
+
+									function deleteItem(event) {
+
+									}
+								</script>
 							</div>
 						</div>
 					</div>

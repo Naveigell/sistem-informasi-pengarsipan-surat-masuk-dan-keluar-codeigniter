@@ -47,7 +47,9 @@ class Login extends CI_Controller {
 						$data = array(
 							"id"			=> $user[0]->user_id,
 							"username"		=> $user[0]->username,
+							"name"			=> $user[0]->nama_lengkap,
 							"role"			=> $user[0]->role,
+							"avatar"		=> $user[0]->photo
 						);
 
 						// update the last login
@@ -69,7 +71,6 @@ class Login extends CI_Controller {
 					));
 				}
 
-				redirect(base_url().'login');
 			} else {
 				$field_names = array('email', 'password');
 				$errors = array();
@@ -80,8 +81,8 @@ class Login extends CI_Controller {
 
 				$this->session->set_flashdata('errors', $errors);
 
-				redirect(base_url().'login');
 			}
+			redirect(base_url().'login');
 		} else {
 			show_404();
 		}

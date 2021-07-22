@@ -12,8 +12,11 @@
 	},
 	"require": {
 		"php": ">=5.3.7",
-		"dompdf/dompdf": "^1.0"
-	},
+		"dompdf/dompdf": "^1.0",
+      "ext-json": "*",
+		"longman/telegram-bot": "^0.74.0",
+      "ext-curl": "*"
+    },
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"
 	},

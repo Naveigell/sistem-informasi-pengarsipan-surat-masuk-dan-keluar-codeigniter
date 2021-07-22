@@ -1,6 +1,7 @@
 <?php
 /**
  * @var $errors
+ * @var $users
  */
 ?>
 <div class="container-fluid">
@@ -38,7 +39,11 @@
 						</div>
 						<div class="mb-3">
 							<label class="small mb-1" for="penerima">Nama Penerima</label>
-							<input name="penerima" class="form-control" id="penerima" type="text" placeholder="Masukkan nama penerima" />
+							<select name="penerima" class="form-control" id="penerima" type="text">
+								<?php for ($i = 0; $i < count($users); $i++) { ?>
+									<option value="<?= $users[$i]->user_id; ?>"><?= $users[$i]->nama_lengkap; ?></option>
+								<?php } ?>
+							</select>
 							<?php if (isset($errors['penerima'])) {?>
 								<span class="text text-danger"><?php echo $errors['penerima']; ?></span>
 							<?php } ?>

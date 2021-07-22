@@ -18650,7 +18650,7 @@ telegram:
   changes:
     - '4.7'
     - 5.0.0
-  label: Telegram
+  label: TelegramLib
   search:
     terms: []
   styles:
@@ -18660,7 +18660,7 @@ telegram:
 telegram-plane:
   changes:
     - 5.0.0
-  label: Telegram Plane
+  label: TelegramLib Plane
   search:
     terms: []
   styles:

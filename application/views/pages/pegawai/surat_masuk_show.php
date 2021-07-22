@@ -35,7 +35,7 @@ if (count($surat_masuk) <= 0) {
 						</div>
 						<div class="mb-3">
 							<label class="small mb-1" for="penerima">Nama Penerima</label>
-							<input name="penerima" disabled class="form-control" id="penerima" type="text" placeholder="Masukkan nama penerima" value="<?php echo $surat_masuk[0]->penerima; ?>"/>
+							<input name="penerima" disabled class="form-control" id="penerima" type="text" placeholder="Masukkan nama penerima" value="<?php echo $surat_masuk[0]->nama_lengkap; ?>"/>
 						</div>
 						<div class="mb-3">
 							<label class="small mb-1" for="perihal">Perihal</label>
@@ -47,7 +47,8 @@ if (count($surat_masuk) <= 0) {
 						</div>
 						<div class="mb-3">
 							<label class="small mb-1" for="lampiran">Lampiran</label><br>
-							<a href="<?php echo base_url(); ?>uploads/suratmasuk/<?php echo $surat_masuk[0]->lampiran; ?>" class="btn btn-dark btn-sm">Download</a>
+							<a href="<?php echo base_url(); ?>suratmasuk/download/<?php echo $surat_masuk[0]->id_sm; ?>" class="btn btn-dark btn-sm">Download</a>
+							<span class="text text-secondary small d-block mt-2">Download file untuk mengubah status menjadi dibaca</span>
 						</div>
 					</form>
 				</div>

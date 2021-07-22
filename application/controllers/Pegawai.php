@@ -91,19 +91,24 @@ class Pegawai extends CI_Controller {
 
 			if ($this->form_validation->run()) {
 
-				$created = $this->db->insert($this->table, array(
-					"username"		=> $this->input->post('username'),
-					"password"		=> password_hash(123456, PASSWORD_DEFAULT),
-					"nama_lengkap"	=> $this->input->post('nama_lengkap'),
-					"email"			=> $this->input->post('email'),
-					"phone"			=> $this->input->post('telp'),
-					"role"			=> 'pegawai',
-					"is_active"		=> 1
-				));
+				$filename	= uniqid().'.png';
+				$copied 	= copy(FCPATH.'assets/img/default.png', FCPATH.'assets/img/avatar/'.$filename);
+				if ($copied) {
+					$created = $this->db->insert($this->table, array(
+						"username"		=> $this->input->post('username'),
+						"password"		=> password_hash(123456, PASSWORD_DEFAULT),
+						"nama_lengkap"	=> $this->input->post('nama_lengkap'),
+						"email"			=> $this->input->post('email'),
+						"phone"			=> $this->input->post('telp'),
+						"role"			=> 'pegawai',
+						"photo"			=> $filename,
+						"is_active"		=> 1,
+					));
 
-				if ($created) {
-					$this->session->set_flashdata('message_success', 'Pegawai berhasil ditambah');
-					redirect(base_url().'pegawai');
+					if ($created) {
+						$this->session->set_flashdata('message_success', 'Pegawai berhasil ditambah');
+						redirect(base_url().'pegawai');
+					}
 				}
 			} else {
 				$errors = $this->form_validation->error_array();

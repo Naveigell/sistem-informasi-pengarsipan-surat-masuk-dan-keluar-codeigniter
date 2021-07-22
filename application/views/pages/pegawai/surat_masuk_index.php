@@ -2,6 +2,7 @@
 /**
  * @var $errors
  * @var $message_success
+ * @var $message_warning
  * @var $surat_masuk
  */
 ?>
@@ -27,6 +28,11 @@
 						<?php if (isset($message_success)) { ?>
 								<div class="alert alert-success">
 									<?php echo $message_success; ?>
+								</div>
+						<?php } ?>
+						<?php if (isset($message_warning)) { ?>
+								<div class="alert alert-warning">
+									<?php echo $message_warning; ?>
 								</div>
 						<?php } ?>
 						<div class="table-responsive">

@@ -39,7 +39,7 @@ class Telegram extends CI_Controller
 					}
 				}
 
-				$this->telegramlib->sendMessage($id, $message, $request_contact);
+				$this->telegramlib->sendMessage($id, $message, array("request_contact" => $request_contact));
 			} else {
 				$this->telegramlib->sendMessage($messages["from"]["id"], "Bot response");
 			}

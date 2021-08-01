@@ -289,6 +289,7 @@ class SuratMasuk extends CI_Controller {
 					$pengirim = $this->session->userdata("name");
 					if (count($penerima) > 0) {
 						$this->telegramlib->sendMessage($penerima[0]->chat_id, "Hallo, kamu menerima surat masuk dari <i><b>$pengirim</b></i> dengan Nomor Surat <i><b>$nosurat</b></i>, mohon untuk segera dibaca ya!", array("html"	=> true));
+						$this->telegramlib->sendDocument($penerima[0]->chat_id, $lampiran.'.pdf');
 					} else {
 						$this->session->set_flashdata('message_warning', "Telegram pengguna tidak terdaftar dalam sistem");
 					}

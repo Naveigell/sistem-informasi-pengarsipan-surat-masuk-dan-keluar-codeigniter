@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 01, 2021 at 04:06 PM
+-- Generation Time: Aug 04, 2021 at 02:22 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -46,9 +46,9 @@ CREATE TABLE `tbuser` (
 --
 
 INSERT INTO `tbuser` (`user_id`, `username`, `password`, `nama_lengkap`, `email`, `phone`, `role`, `last_login`, `photo`, `created_at`, `is_active`) VALUES
-(1, 'pegawai', '$2y$10$g1a1JE8luJfz/Z9v9IPVY.4kTwqHULwpx5jufenD6ZVHcZF87BLeC', 'Bill Gates', 'pegawai123@gmail.com', '082340800182', 'pegawai', '2021-08-01 08:03:50', '60dbf22260a1a.png', '2021-06-29 11:06:45', 1),
+(1, 'pegawai', '$2y$10$g1a1JE8luJfz/Z9v9IPVY.4kTwqHULwpx5jufenD6ZVHcZF87BLeC', 'Bill Gates', 'pegawai123@gmail.com', '082340800182', 'pegawai', '2021-08-03 18:20:15', '60dbf22260a1a.png', '2021-06-29 11:06:45', 1),
 (3, 'admin12345', '$2y$10$oIly.nIQ2gPRZOz7cm3zSu6KwsfZXq2O8Eh0NYxt55MV.MFjfCbYC', 'Elon Musk', 'admin@gmail.com1', '083119646837', 'admin', '2021-06-29 22:28:19', '60dbf39a21a3c.png', '2021-06-29 11:06:45', 1),
-(7, 'tokohp900', '$2y$10$HE6OoVdbT9pPhVrcKCg.Uu1mtetd8dVQBNOKt8tLkxCdTeVysevE6', 'Steve Jobs', 'tokohp90@gmail.com', '085155392431', 'pegawai', '2021-08-01 07:56:56', '60dbf3baad686.png', '2021-06-30 04:30:15', 1);
+(7, 'tokohp900', '$2y$10$HE6OoVdbT9pPhVrcKCg.Uu1mtetd8dVQBNOKt8tLkxCdTeVysevE6', 'Steve Jobs', 'tokohp90@gmail.com', '085155392431', 'pegawai', '2021-08-03 11:42:45', '60dbf3baad686.png', '2021-06-30 04:30:15', 1);
 
 -- --------------------------------------------------------
 
@@ -96,7 +96,9 @@ CREATE TABLE `tb_suratmasuk` (
 --
 
 INSERT INTO `tb_suratmasuk` (`id_sm`, `no_surat`, `perihal`, `pengirim_id`, `penerima_id`, `no_hp`, `tanggal_sm`, `dibaca`, `lampiran`) VALUES
-(63, 'SM/SM/1/1999', 'Permohonan perihal', 1, 7, '08192374154', '2021-08-02', 0, '6106aa4671d4420211608050158.pdf');
+(63, 'SM/SM/1/1999', 'Permohonan perihal', 1, 7, '08192374154', '2021-08-02', 0, '6106aa4671d4420211608050158.pdf'),
+(64, 'SM/SM/1/1999', 'Permohonan depopulasi', 7, 1, '08192378124', '2021-08-16', 0, '61097c8e7ed8a20211908270342.pdf'),
+(65, 'SK/SK/110/1999', 'Permohonan depopulasi', 1, 7, '08192374154', '2021-08-01', 0, '61097cbb436a320211908280327.pdf');
 
 -- --------------------------------------------------------
 
@@ -170,7 +172,7 @@ ALTER TABLE `tb_suratkeluar`
 -- AUTO_INCREMENT for table `tb_suratmasuk`
 --
 ALTER TABLE `tb_suratmasuk`
-  MODIFY `id_sm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id_sm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `telegram_users`
